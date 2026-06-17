@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
@@ -18,7 +18,25 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(255),
             allowNull: false
         },
+        auth_token: {
+            type: DataTypes.STRING(512),
+            allowNull: true
+        },
+        role: {
+            type: DataTypes.ENUM('admin', 'manager', 'customer'),
+            allowNull: false,
+            defaultValue: 'customer'
+        },
+        is_active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
+        },
         deleted_at: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        last_login_at: {
             type: DataTypes.DATE,
             allowNull: true
         }

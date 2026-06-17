@@ -1,13 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Stock = sequelize.define('Stock', {
-        // stock_id: {
-        //     type: DataTypes.INTEGER,
-        //     primaryKey: true,
-        //     autoIncrement: true
-        // },
         item_id: {
             primaryKey: true,
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false,
             references: {
                 model: 'item',
@@ -18,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
+        },
+        low_stock_threshold: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 5
         }
     }, {
         tableName: 'stock',
